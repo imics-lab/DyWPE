@@ -6,7 +6,7 @@ A signal-aware positional encoding framework for time series transformers.
 
 # Core imports
 from .core.dywpe import DyWPE
-from .core.positional_encodings import tAPE, LearnedPositionalEncoding, FixedPositionalEncoding, ConvSPE, TemporalPositionalEncoding, RelativePositionalEncoding, RotaryPositionalEncoding
+from .core.position_encodings import tAPE, LearnedPositionalEncoding, FixedPositionalEncoding, ConvSPE, TemporalPositionalEncoding, RelativePositionalEncoding, RotaryPositionalEncoding
 
 # Model imports
 from .models.transformer import TimeSeriesTransformer, create_model_with_dywpe

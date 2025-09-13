@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from ..core.dywpe import DyWPE
-from ..core.positional_encodings import tAPE, LearnedPositionalEncoding, FixedPositionalEncoding, ConvSPE, TemporalPositionalEncoding, RelativePositionalEncoding, RotaryPositionalEncoding
+from ..core.position_encodings import tAPE, LearnedPositionalEncoding, FixedPositionalEncoding, ConvSPE, TemporalPositionalEncoding, RelativePositionalEncoding, RotaryPositionalEncoding
 
 
 def get_pos_encoder(pos_encoding, d_model, dropout=0.1, max_len=5000):

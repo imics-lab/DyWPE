@@ -880,9 +880,9 @@ if __name__ == "__main__":
     results = run_core_ablation_studies(
         dataset_name='LSST',
         model_params=model_params,
-        train_loader=None,  # Replace with your train_loader_fixed
-        valid_loader=None,  # Replace with your valid_loader_fixed
-        test_loader=None,   # Replace with your test_loader_fixed
+        train_loader=None, 
+        valid_loader=None, 
+        test_loader=None,   
         num_epochs=50
     )
 
