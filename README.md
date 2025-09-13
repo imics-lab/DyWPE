@@ -4,10 +4,13 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-red.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Overview
+## Description
 
 Dynamic Wavelet Positional Encoding (DyWPE) introduces a new paradigm: a signal-aware PE framework. Instead of relying on abstract indices, DyWPE generates positional embeddings directly from the input time series signal. By leveraging the Discrete Wavelet Transform (DWT), DyWPE captures time-frequency information, creating a rich positional representation that is dynamically adapted to the signal's local behavior. This allows the model to distinguish between, for example, a quiet, stable period and a volatile, high-frequency period, even if they occur at the same absolute positions in different samples.
 
+<p align="center">
+<img src="docs/DyWPE.png" alt="DyWPE Architecture" width="600"/>
+</p>
 
 ## Key Features
 
@@ -23,7 +26,6 @@ Dynamic Wavelet Positional Encoding (DyWPE) introduces a new paradigm: a signal-
 git clone https://github.com/imics-lab/dywpe.git
 cd dywpe
 pip install -r requirements.txt
-pip install -e .
 ```
 
 ### Dependencies
@@ -185,45 +187,11 @@ For input `x ∈ ℝ^(B×L×d_x)`:
 3. **Gated Modulation**: `modulated_coeffs = gate(scale_embeddings, coeffs)`
 4. **IDWT Synthesis**: `P_DyWPE = IDWT(modulated_coeffs)`
 
-## Usage with Your Data
-
-### Custom Dataset Integration
-
-```python
-from torch.utils.data import DataLoader
-from dywpe import create_transformer_with_dywpe
-
-# Your data loading
-train_loader = DataLoader(your_train_dataset, batch_size=32)
-val_loader = DataLoader(your_val_dataset, batch_size=32)
-
-# Model creation
-model = create_transformer_with_dywpe(
-    input_timesteps=your_sequence_length,
-    in_channels=your_feature_count,
-    patch_size=8,
-    embedding_dim=128,
-    num_classes=your_num_classes,
-    max_level=3  # Adjust based on sequence length
-)
-
-# Training loop
-criterion = torch.nn.CrossEntropyLoss()
-optimizer = torch.optim.AdamW(model.parameters(), lr=0.001)
-
-for epoch in range(num_epochs):
-    for batch_x, batch_y in train_loader:
-        optimizer.zero_grad()
-        outputs = model(batch_x)
-        loss = criterion(outputs, batch_y)
-        loss.backward()
-        optimizer.step()
-```
 
 ### Parameter Guidelines
 
 - **max_level**: Should be ≤ log₂(sequence_length) - 2
-- **wavelet**: 'db4' works well for most applications
+- **wavelet**: 'db4, db2.2' work well for most applications
 - **embedding_dim**: Scale with sequence complexity
 - **patch_size**: Typically 8-16 for time series
 
@@ -237,7 +205,6 @@ Please make sure to update tests as appropriate.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 
 
 ## Citation
