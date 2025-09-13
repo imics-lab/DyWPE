@@ -9,7 +9,7 @@
 Dynamic Wavelet Positional Encoding (DyWPE) introduces a new paradigm: a signal-aware PE framework. Instead of relying on abstract indices, DyWPE generates positional embeddings directly from the input time series signal. By leveraging the Discrete Wavelet Transform (DWT), DyWPE captures time-frequency information, creating a rich positional representation that is dynamically adapted to the signal's local behavior. This allows the model to distinguish between, for example, a quiet, stable period and a volatile, high-frequency period, even if they occur at the same absolute positions in different samples.
 
 <p align="center">
-<img src="docs/DyWPE.png" alt="DyWPE Architecture" width="600"/>
+  <img src="docs/dywpe-arch.png" alt="DyWPE Architecture" width="95%">
 </p>
 
 ## Key Features
