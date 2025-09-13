@@ -1,26 +1,70 @@
-
-
-# See GiHub's Doc on citation files: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files
-
 # This CITATION.cff file was generated with cffinit.
 # Visit https://bit.ly/cffinit to generate yours today!
 
-# Below is the citation for this template repository. Replace it with your own!
-
-### REPLACE ME >>>
-
 cff-version: 1.2.0
-title: >-
-  Research Project Template
+title: Time Series Embedding Methods for Classification Tasks
 message: >-
-  If you find this project or code useful, please consider citing it as below!
+  If you use this software, please cite it using the
+  metadata from this file.
 type: software
 authors:
-  - given-names: Ellis L
-    family-names: Brown
-    name-suffix: II
-    email: ellisbrown@cmu.edu
-    affiliation: Carnegie Mellon University 
-    orcid: 'https://orcid.org/0000-0002-8117-0778 '
-
-### REPLACE ME <<<
+  - given-names: Habib
+    family-names: Irani
+    orcid: 'https://orcid.org/0009-0003-5035-9257'
+    affiliation: 'Texas State University'
+  - given-names: Vangelis
+    family-names: Metsis
+    orcid: 'https://orcid.org/0000-0002-7371-8887'
+    affiliation: 'Texas State University'
+identifiers:
+  - type: url
+    value: 'https://github.com/imics-lab/time-series-embedding'
+    description: 'GitHub repository'
+  - type: url
+    value: 'https://arxiv.org/abs/2501.13392'
+    description: 'ArXiv preprint'
+repository-code: 'https://github.com/imics-lab/time-series-embedding'
+url: 'https://github.com/imics-lab/time-series-embedding'
+abstract: >-
+  
+keywords:
+  - time-series
+  - embeddings
+  - machine-learning
+  - wavelet
+  - position encoding
+  - signal-processing
+  - deep-learning
+license: MIT
+version: 1.0.0
+date-released: '2025-01-23'
+preferred-citation:
+  type: article
+  authors:
+    - given-names: Habib
+      family-names: Irani
+      orcid: 'https://orcid.org/0009-0003-5035-9257'
+      affiliation: 'Texas State University'
+    - given-names: Vangelis
+      family-names: Metsis
+      orcid: 'https://orcid.org/0000-0002-7371-8887'
+      affiliation: 'Texas State University'
+  title: ""
+  year: 2025
+  month: 1
+  journal: ""
+  url: ""
+  identifiers:
+    - type: url
+      value: ''
+      description: ''
+  abstract: >-
+    
+  keywords:
+    - time-series
+    - embeddings
+    - machine-learning
+    - wavelet
+    - position encoding
+    - signal-processing
+    - deep-learning
