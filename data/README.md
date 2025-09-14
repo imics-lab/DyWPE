@@ -1,4 +1,4 @@
-# Data
+## Data
 
 This folder utilizes multiple time-series datasets for classification tasks across domains such as human activity recognition (HAR), EEG, ECG, Traffic, device data, and financial data. These datasets are preprocessed and loaded using Python, with deep learning models for time-series classification. Below is a detailed description of the datasets used and the data preprocessing steps.
 
@@ -68,7 +68,15 @@ This folder utilizes multiple time-series datasets for classification tasks acro
 - **No. of Classes**: 2
 - **Description**: The SelfRegulationSCP1 dataset consists of EEG signals related to self-regulation through slow cortical potentials (SCPs). Each instance contains 896 time steps, and the classification task is binary.
 
-### 9. **UniMiB-SHAR**
+### 9. **SelfRegulationSCP2**
+- **Type**: EEG (Electroencephalogram) Data
+- **Train Size**: 200
+- **Test Size**: 180
+- **Length**: 1152 time steps
+- **No. of Classes**: 2
+- **Description**: The SelfRegulationSCP2 dataset consists of EEG signals related to self-regulation through slow cortical potentials (SCPs). Each instance contains 896 time steps, and the classification task is binary.
+
+### 10. **UniMiB-SHAR**
 - **Type**: Human Activity Recognition (HAR)
 - **Train Size**: 4,601
 - **Validation Size**: 1,454
@@ -77,14 +85,13 @@ This folder utilizes multiple time-series datasets for classification tasks acro
 - **No. of Classes**: 9
 - **Description**: The UniMiB-SHAR dataset is used for classifying human activities based on sensor data. It contains training, validation, and test sets with 151 time steps per instance.
 
-### 10. **Leotta_2021**
-- **Type**: Human Activity Recognition (HAR)
-- **Train Size**: 2,391
-- **Validation Size**: 1,167
-- **Test Size**: 1,987
-- **Length**: 300 time steps
-- **No. of Classes**: 18
-- **Description**: The Leotta 2021 dataset includes sensor data for various activities and is used for classifying 18 different activities. Each instance consists of 300 time steps.
+### 11. **JapaneseVowels**
+- **Type**: AUDIO
+- **Train Size**: 270
+- **Test Size**: 370
+- **Length**: 29 time steps
+- **No. of Classes**: 9
+- **Description**: The JapaneseVowels dataset includes s9 Japanese-male speakers were recorded saying the vowels 'a' and 'e'. Each instance consists of 29 time steps.
 
 ## Downloading Datasets
 

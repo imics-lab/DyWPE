@@ -11,7 +11,7 @@ This is a PyTorch implementation of Dynamic Wavelet Position Encoding (DyWPE) fo
 Dynamic Wavelet Positional Encoding (DyWPE) introduces a new paradigm: a signal-aware PE framework. Instead of relying on abstract indices, DyWPE generates positional embeddings directly from the input time series signal. By leveraging the Discrete Wavelet Transform (DWT), DyWPE captures time-frequency information, creating a rich positional representation that is dynamically adapted to the signal's local behavior. This allows the model to distinguish between, for example, a quiet, stable period and a volatile, high-frequency period, even if they occur at the same absolute positions in different samples.
 
 <p align="center">
-  <img src="docs/dywpe-arch.png" alt="DyWPE Architecture" width="98%">
+  <img src="docs/dywpe-architecture.png" alt="DyWPE Architecture" width="98%">
 </p>
 
 ## Methodology
@@ -42,7 +42,7 @@ For input `x ∈ ℝ^(B×L×d_x)`:
 - **patch_size**: Typically 8-16 for time series
 
 
-### Installation
+## Installation
 
 ```bash
 git clone https://github.com/imics-lab/DyWPE.git
