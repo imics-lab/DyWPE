@@ -1,10 +1,10 @@
-## Dynamic Wavelet Position Encoding 
+## Dynamic Wavelet Position Encoding (DyWPE)
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-red.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is a PyTorch implementation of Dynamic Wavelet Position Encoding (DyWPE) for Time Series Transformers
+This is a PyTorch implementation of Dynamic Wavelet Position Encoding (DyWPE) for Time Series data
 
 ## Overview
 
@@ -13,14 +13,6 @@ Dynamic Wavelet Positional Encoding (DyWPE) introduces a new paradigm: a signal-
 <p align="center">
   <img src="docs/dywpe-arch.png" alt="DyWPE Architecture" width="98%">
 </p>
-
-### Key Features
-
-- **Signal-Aware**: First positional encoding that adapts to signal content
-- **Multi-Scale**: Captures hierarchical temporal patterns via wavelet decomposition  
-- **Non-Stationary Ready**: Inherently handles time-varying signal characteristics
-- **Efficient**: Linear $\mathcal{O}(L)$ complexity for sequence length L
-- **Comprehensive Ablations**: Rigorous validation of core claims
 
 ## Methodology
 
@@ -53,8 +45,8 @@ For input `x ∈ ℝ^(B×L×d_x)`:
 ### Installation
 
 ```bash
-git clone https://github.com/imics-lab/dywpe.git
-cd dywpe
+git clone https://github.com/imics-lab/DyWPE.git
+cd DyWPE
 pip install -r requirements.txt
 ```
 
@@ -79,7 +71,7 @@ dywpe/
 │   │   └── position_encodings.py # Other PEs implementation
 │   ├── models/
 │   │   ├── embeddings.py         # Patch embedding module
-│   │   └── transformer.py        # Modular transformer  
+│   │   └── transformer.py        # Time Series transformer  
 │   ├── ablation/
 │   │   ├── benchmark.py          # PositionalEncodingBenchmark class
 │   │   ├── signal_awareness.py   # Core ablation studies
@@ -89,7 +81,7 @@ dywpe/
 ├── scripts/
 │   └── run_benchmark_example.py  
 │   └── run_ablation_studies.py  
-│   └── cmplete_example.py  
+│   └── complete_example.py  
 └── README.md                 
 ```
 
@@ -119,7 +111,7 @@ models = benchmark.run_full_benchmark(
     valid_loader,
     test_loader,
     encodings=['dywpe'],
-    n_epochs=50
+    n_epochs=num_epochs
 )
 
 benchmark.print_summary()
@@ -168,7 +160,7 @@ results = run_multiscale_ablation(
     train_loader=train_loader,
     valid_loader=valid_loader,
     test_loader=test_loader,
-    num_epochs=50
+    num_epochs=num_epochs
 )
 ```
 
@@ -181,13 +173,13 @@ results = run_multiscale_ablation(
 
 ```bash
 # Run both core ablation studies
-python experiments/run_ablation_studies.py --study both --dataset your_data --epochs 50
+python experiments/run_ablation_studies.py --study both --dataset data_name --epochs num_epochs
 
 # Run signal-awareness study only
-python experiments/run_ablation_studies.py --study signal_awareness --dataset your_data --epochs 50
+python experiments/run_ablation_studies.py --study signal_awareness --dataset data_name --epochs num_epochs
 
 # Run multi-scale study only  
-python experiments/run_ablation_studies.py --study multiscale --dataset your_data --epochs 50
+python experiments/run_ablation_studies.py --study multiscale --dataset data_name --epochs num_epochs
 ```
 
 ### Complete Example
