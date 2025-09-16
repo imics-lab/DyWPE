@@ -85,113 +85,55 @@ dywpe/
 └── README.md                 
 ```
 
-### Usage
+### Core Components
 
 ```python
-from src.ablation.benchmark import PositionalEncodingBenchmark
-
-benchmark = PositionalEncodingBenchmark()
-
-model_params = {
-    'input_timesteps': input_timesteps,
-    'in_channels': in_channels,
-    'patch_size': patch_size,
-    'embedding_dim': 32,
-    'num_transformer_layers': 4,
-    'num_heads': 4,
-    'dim_feedforward': 128,
-    'dropout': 0.2,
-    'num_classes': num_classes
-}
-
-# Run benchmark
-models = benchmark.run_full_benchmark(
-    model_params,
-    train_loader,
-    valid_loader,
-    test_loader,
-    encodings=['dywpe'],
-    n_epochs=num_epochs
-)
-
-benchmark.print_summary()
-benchmark.plot_comparison('results.png')
-
+class DyWPE(nn.Module):
+    def __init__(self, d_model, d_x, max_level, wavelet='db4'):
+        super().__init__()
+        
+        # Professional wavelet transforms
+        self.dwt = DWT1D(wave=wavelet, J=max_level, mode='symmetric')
+        self.idwt = IDWT1D(wave=wavelet, mode='symmetric')
+        
+        # Learnable components
+        self.channel_proj = nn.Linear(d_x, 1)
+        self.scale_embeddings = nn.Parameter(torch.randn(max_level + 1, d_model))
+        self.gate_w_g = nn.Linear(d_model, d_model)
+        self.gate_w_v = nn.Linear(d_model, d_model)
 ```
 
-
-## Ablation Studies
-
-This repository includes the two critical ablation studies that validate DyWPE's core contributions:
-
-### 1. Signal-Awareness Study
-
-**Question**: Is signal-awareness (`P = f(x, θ)`) better than static approaches (`P = f(θ)`)?
-
+## Usage
 ```python
-from src.ablation.signal_awarness import run_signal_awareness_ablation
+from core.dywpe import DyWPE
+from models.transformer import TimeSeriesTransformer
 
-results = run_signal_awareness_ablation(
-    dataset_name='dataset_name',
-    model_params=model_params,
-    pe_params=pe_params,
-    train_loader=train_loader,
-    valid_loader=valid_loader,
-    test_loader=test_loader,
-    num_epochs=num_epochs
-)
-```
+# Initialize DyWPE 
+pos_encoder = DyWPE(
+            d_model=D_MODEL,         
+            d_x=INPUT_CHANNELS,      # Number of input channels
+            max_level=MAX_LEVEL,     # Wavelet decomposition levels  # log2(SEQ_LENGTH) = x . Can go up to x .
+            wavelet='db4'            # Wavelet type ('haar', 'db4', 'db8', 'coif2', etc.)
+        )
 
-**Compares**:
-- **DyWPE**: Full signal-aware approach
-- **Static Wavelet PE**: Same multi-scale framework, no signal dependency
+# Use in transformer
+model = TimeSeriesTransformer(
+        input_timesteps= SEQ_LENGTH,         # Sequence length
+        in_channels= INPUT_CHANNELS,         # Number of input channels
+        patch_size=PATCH_SIZE,               # Patch size for embedding
+        embedding_dim=EMBED_DIM.             # Embedding dimension
+        num_transformer_layers=NUM_LAYERS,   # Number of transformer layers (4, 8, etc.)
+        num_heads=N_HEADS,                   # Number of attention heads
+        num_layers=NUM_LAYERS,               # Number of transformer layers
+        dim_feedforward=DIM_FF,              # Feedforward dimension
+        dropout=DROPOUT,                     # Dropout rate (0.1, 0.2, etc.)
+        num_classes= NUM_CLASSES             # Number of output classes
+        pos_encoding='dywpe',                # Positional encoding type
+    )
 
-### 2. Multi-Scale Study
-
-**Question**: Is hierarchical wavelet decomposition essential?
-
-```python
-from src.ablation.multiscale import run_multiscale_ablation
-
-results = run_multiscale_ablation(
-    dataset_name='dataset_name',
-    model_params=model_params,
-    pe_params=pe_params,
-    train_loader=train_loader,
-    valid_loader=valid_loader,
-    test_loader=test_loader,
-    num_epochs=num_epochs
-)
-```
-
-**Compares**:
-- **DyWPE (Multi-Scale)**: Full hierarchical decomposition
-- **Single-Scale DyWPE**: J=1 decomposition only
-- **Gated Conv PE**: Alternative single-scale approach
-
-### Run All Ablations
-
-```bash
-# Run both core ablation studies
-python experiments/run_ablation_studies.py --study both --dataset data_name --epochs num_epochs
-
-# Run signal-awareness study only
-python experiments/run_ablation_studies.py --study signal_awareness --dataset data_name --epochs num_epochs
-
-# Run multi-scale study only  
-python experiments/run_ablation_studies.py --study multiscale --dataset data_name --epochs num_epochs
-```
-
-### Complete Example
-
-See `scripts/complete_example.py` for a comprehensive tutorial that demonstrates:
-
-- Basic DyWPE usage
-- Running ablation studies
-- Interpreting results
-
-```bash
-python scripts/complete_example.py
+# Forward pass
+x = torch.randn(BATCH_SIZE, SEQ_LENGTH, INPUT_CHANNELS)  # (batch, sequence, features)
+output = model(x)
 ```
 
 

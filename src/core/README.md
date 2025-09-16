@@ -1,12 +1,7 @@
-# Dynamic Wavelet Positional Encoding (DyWPE): A Signal-Aware Framework
+## Dynamic Wavelet Positional Encoding (DyWPE): A Signal-Aware Framework
 
-## 1. Overview and Motivation
 
-Existing positional encoding (PE) methods in transformers, from sinusoidal PEs to advanced relative variants, are fundamentally signal-agnostic. They derive positional information from the integer indices of a sequence (`0, 1, ..., L-1`) and are blind to the underlying characteristics of the signal itself. This is a critical limitation for time series analysis, where signals are often non-stationary and exhibit complex, multi-scale dynamics (e.g., high-frequency noise superimposed on low-frequency seasonality).
-
-**Dynamic Wavelet Positional Encoding (DyWPE)** introduces a new paradigm: a signal-aware PE framework. Instead of relying on abstract indices, DyWPE generates positional embeddings directly from the input time series signal. By leveraging the Discrete Wavelet Transform (DWT), DyWPE captures time-frequency information, creating a rich positional representation that is dynamically adapted to the signal's local behavior. This allows the model to distinguish between, for example, a quiet, stable period and a volatile, high-frequency period, even if they occur at the same absolute positions in different samples.
-
-## 2. Mathematical Formulation
+###  Mathematical Formulation
 
 Let the input be a batch of multivariate time series $X \in \mathbb{R}^{B \times L \times d_x}$, where $B$ is the batch size, $L$ is the sequence length, and $d_x$ is the number of input channels. The objective is to produce a positional encoding $P_{DyWPE} \in \mathbb{R}^{B \times L \times d_{model}}$, where $d_{model}$ is the transformer's hidden dimension.
 
