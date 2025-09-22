@@ -103,7 +103,61 @@ class DyWPE(nn.Module):
         self.gate_w_v = nn.Linear(d_model, d_model)
 ```
 
-## Usage
+## Usage as Embedding Layer Approach
+```python
+from core.dywpe import DyWPE
+
+class TimeSeriesEmbeddingWithDyWPE(nn.Module):
+    """
+    Drop-in replacement for standard embedding layers in time series transformers.
+    Combines input projection with DyWPE position encoding.
+    """
+    def __init__(self, input_dim, d_model, max_length, max_level, wavelet='db4'):
+        super().__init__()
+        # Input feature projection
+        self.input_proj = nn.Linear(input_dim, d_model)
+        
+        # DyWPE2 positional encoding
+        self.pos_encoder = DyWPE(
+            d_model=d_model,
+            d_x=d_model,        # Use d_model for embedded tokens
+            max_level=max_level,
+            wavelet=wavelet
+        )
+        
+    def forward(self, x):
+        """
+        Args:
+            x: Time series input (batch_size, seq_length, input_dim)
+        Returns:
+            Embedded and positionally encoded features (batch_size, seq_length, d_model)
+        """
+        # Project input features
+        x = self.input_proj(x)  # (batch, seq_len, d_model)
+        
+        # Apply DyWPE2 positional encoding
+        x = self.pos_encoder(x)  # (batch, seq_len, d_model)
+        
+        return x
+
+# Usage in any transformer architecture
+embedding_layer = TimeSeriesEmbeddingWithDyWPE(
+    input_dim=6,      # Number of time series features
+    d_model=64,       # Model embedding dimension
+    max_length=128,   # Maximum sequence length
+    max_level=2,      # Wavelet decomposition levels
+    wavelet='db4'     # Wavelet type
+)
+
+# Test the embedding layer
+time_series = torch.randn(BATCH_SIZE, SEQ_LENGTH, INPUT_CHANNELS)  # (batch, sequence, features)
+embedded = embedding_layer(time_series)
+
+# Now you can pass 'embedded' to any standard transformer encoder
+```
+
+
+## Usage in PatchTST
 ```python
 from core.dywpe import DyWPE
 from models.transformer import TimeSeriesTransformer
@@ -151,6 +205,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Citation
 
 ```bibtex
-TBD
+@article{irani2025dywpe,
+  title={DyWPE: Signal-Aware Dynamic Wavelet Positional Encoding for Time Series Transformers},
+  author={Irani, Habib and Metsis, Vangelis},
+  journal={arXiv preprint arXiv:2509.14640},
+  year={2025}
+}
 ```
 

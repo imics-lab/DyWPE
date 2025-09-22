@@ -119,8 +119,8 @@ class DyWPE(nn.Module):
         pos_encoding = pos_encoding.permute(0, 2, 1)
         
         # Ensure output length matches input length, handle potential off-by-one DWT issues
-        if pos_encoding.shape != L:
-            pos_encoding = nn.functional.pad(pos_encoding, (0, 0, 0, L - pos_encoding.shape))
+        if pos_encoding.shape[1] != L:
+            pos_encoding = nn.functional.pad(pos_encoding, (0, 0, 0, L - pos_encoding.shape[1]))
 
         return pos_encoding
 
