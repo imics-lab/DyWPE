@@ -1,10 +1,11 @@
-## Dynamic Wavelet Position Encoding (DyWPE)
+## Dynamic Wavelet Position Encoding (DyWPE) for Time Series Transformers
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-red.svg)](https://pytorch.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![arXiv](https://img.shields.io/badge/arXiv-2509.14640-b31b1b.svg)](https://arxiv.org/abs/2509.14640)
 
-This is a PyTorch implementation of Dynamic Wavelet Position Encoding (DyWPE) for Time Series data
+This is a PyTorch implementation of Dynamic Wavelet Positional Encoding (DyWPE) for Time Series Transformers
 
 ## Overview
 
@@ -39,7 +40,7 @@ For input `x ∈ ℝ^(B×L×d_x)`:
 - **max_level**: Should be ≤ log₂(sequence_length) - 2
 - **wavelet**: 'db4', 'bior2.2' work well for most applications
 - **embedding_dim**: Scale with sequence complexity
-- **patch_size**: Typically 8-16 for time series
+
 
 
 ## Installation
@@ -135,18 +136,18 @@ class TimeSeriesEmbeddingWithDyWPE(nn.Module):
         # Project input features
         x = self.input_proj(x)  # (batch, seq_len, d_model)
         
-        # Apply DyWPE2 positional encoding
+        # Apply DyWPE positional encoding
         x = self.pos_encoder(x)  # (batch, seq_len, d_model)
         
         return x
 
 # Usage in any transformer architecture
 embedding_layer = TimeSeriesEmbeddingWithDyWPE(
-    input_dim=6,      # Number of time series features
-    d_model=64,       # Model embedding dimension
-    max_length=128,   # Maximum sequence length
-    max_level=2,      # Wavelet decomposition levels
-    wavelet='db4'     # Wavelet type
+    input_dim=INPUT_CHANNELS,    # Number of time series features
+    d_model=D_MODEL,             # Model embedding dimension
+    max_length=SEQ_LENGTH,       # Maximum sequence length
+    max_level=MAX_LEVEL,         # Wavelet decomposition levels
+    wavelet='db4'                # Wavelet type ('haar', 'db4', 'db8', 'coif2', etc.)
 )
 
 # Test the embedding layer
