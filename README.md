@@ -3,21 +3,25 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![ICASSP 2026](https://img.shields.io/badge/ICASSP-2026-green.svg)](https://2026.ieeeicassp.org/)
 [![arXiv](https://img.shields.io/badge/arXiv-2509.14640-b31b1b.svg)](https://arxiv.org/abs/2509.14640)
 
-This is a PyTorch implementation of Dynamic Wavelet Positional Encoding (DyWPE) for Time Series Transformers
+#### **News:** This work has been accepted for publication in [ICASSP 2026](https://2026.ieeeicassp.org/).
 
-## Overview
-
-Dynamic Wavelet Positional Encoding (DyWPE) introduces a new paradigm: a signal-aware PE framework. Instead of relying on abstract indices, DyWPE generates positional embeddings directly from the input time series signal. By leveraging the Discrete Wavelet Transform (DWT), DyWPE captures time-frequency information, creating a rich positional representation that is dynamically adapted to the signal's local behavior. This allows the model to distinguish between, for example, a quiet, stable period and a volatile, high-frequency period, even if they occur at the same absolute positions in different samples.
+This is a PyTorch implementation of "DyWPE: Signal-Aware Dynamic Wavelet Positional Encoding for Time Series Transformers"
 
 <p align="center">
   <img src="docs/dywpe-architecture.png" alt="DyWPE Architecture" width="98%">
 </p>
 
-## Methodology
+### Overview
 
-### Core Innovation: Signal-Awareness
+Dynamic Wavelet Positional Encoding (DyWPE) introduces a new paradigm: a signal-aware PE framework. Instead of relying on abstract indices, DyWPE generates positional embeddings directly from the input time series signal. By leveraging the Discrete Wavelet Transform (DWT), DyWPE captures time-frequency information, creating a rich positional representation that is dynamically adapted to the signal's local behavior. This allows the model to distinguish between, for example, a quiet, stable period and a volatile, high-frequency period, even if they occur at the same absolute positions in different samples.
+
+
+### Methodology
+
+#### Core Innovation: Signal-Awareness
 
 Traditional positional encodings compute `P = f(θ)` using only position indices. DyWPE computes `P = f(x, θ)` by:
 
@@ -25,7 +29,7 @@ Traditional positional encodings compute `P = f(θ)` using only position indices
 2. **Gated Modulation**: Use signal coefficients to modulate learnable scale embeddings
 3. **IDWT Reconstruction**: Synthesize final positional encoding
 
-### Mathematical Framework
+#### Mathematical Framework
 
 For input `x ∈ ℝ^(B×L×d_x)`:
 
@@ -35,7 +39,7 @@ For input `x ∈ ℝ^(B×L×d_x)`:
 4. **IDWT Synthesis**: `P_DyWPE = IDWT(modulated_coeffs)`
 
 
-### Parameter Guidelines
+#### Parameter Guidelines
 
 - **max_level**: Should be ≤ log₂(sequence_length) - 2
 - **wavelet**: 'db4', 'bior2.2' work well for most applications
@@ -43,7 +47,7 @@ For input `x ∈ ℝ^(B×L×d_x)`:
 
 
 
-## Installation
+### Installation
 
 ```bash
 git clone https://github.com/imics-lab/DyWPE.git
@@ -51,7 +55,7 @@ cd DyWPE
 pip install -r requirements.txt
 ```
 
-### Dependencies
+#### Dependencies
 
 ```
 torch>=1.9.0
@@ -62,7 +66,7 @@ scikit-learn>=1.0.0
 pytorch_wavelets>=1.3.0
 ```
 
-### Repository Structure
+#### Repository Structure
 
 ```
 dywpe/
@@ -86,7 +90,7 @@ dywpe/
 └── README.md                 
 ```
 
-### Core Components
+#### Core Components
 
 ```python
 class DyWPE(nn.Module):
@@ -104,7 +108,7 @@ class DyWPE(nn.Module):
         self.gate_w_v = nn.Linear(d_model, d_model)
 ```
 
-## Usage as Embedding Layer Approach
+### Usage as Embedding Layer Approach
 ```python
 from core.dywpe import DyWPE
 
@@ -118,7 +122,7 @@ class TimeSeriesEmbeddingWithDyWPE(nn.Module):
         # Input feature projection
         self.input_proj = nn.Linear(input_dim, d_model)
         
-        # DyWPE2 positional encoding
+        # DyWPE positional encoding
         self.pos_encoder = DyWPE(
             d_model=d_model,
             d_x=d_model,        # Use d_model for embedded tokens
@@ -158,7 +162,7 @@ embedded = embedding_layer(time_series)
 ```
 
 
-## Usage in PatchTST
+### Usage in PatchTST
 ```python
 from core.dywpe import DyWPE
 from models.transformer import TimeSeriesTransformer
@@ -192,25 +196,26 @@ output = model(x)
 ```
 
 
-## Contributing
+### Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## License
+### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
-## Citation
+### Citation
 
 ```bibtex
-@article{irani2025dywpe,
+@inproceedings{irani2026dywpe,
   title={DyWPE: Signal-Aware Dynamic Wavelet Positional Encoding for Time Series Transformers},
   author={Irani, Habib and Metsis, Vangelis},
-  journal={arXiv preprint arXiv:2509.14640},
-  year={2025}
+  booktitle={IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year={2026},
+  organization={IEEE}
 }
 ```
 
