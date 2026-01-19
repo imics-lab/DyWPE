@@ -108,7 +108,9 @@ class DyWPE(nn.Module):
         self.gate_w_v = nn.Linear(d_model, d_model)
 ```
 
-### Usage as Embedding Layer Approach
+### Usage
+
+#### Usage as Embedding Layer Approach
 ```python
 from core.dywpe import DyWPE
 
@@ -162,7 +164,7 @@ embedded = embedding_layer(time_series)
 ```
 
 
-### Usage in PatchTST
+#### Usage in PatchTST
 ```python
 from core.dywpe import DyWPE
 from models.transformer import TimeSeriesTransformer
@@ -195,6 +197,22 @@ x = torch.randn(BATCH_SIZE, SEQ_LENGTH, INPUT_CHANNELS)  # (batch, sequence, fea
 output = model(x)
 ```
 
+### Results
+
+Our comprehensive evaluation across 10 diverse time series datasets demonstrates DyWPE's superior performance compared to state-of-the-art positional encoding methods.
+
+#### Performance Overview
+
+<p align="center">
+  <img src="docs/boxplot.png" alt="Performance Distribution" width="48%">
+  <img src="docs/accuracy_vs_overhead.png" alt="Accuracy vs Overhead" width="48%">
+  <br>
+  <em><strong>Left:</strong> Distribution of z-score normalized classification accuracy across 10 datasets. DyWPE shows the highest median performance and most consistent results. 
+  <strong>Right:</strong> Trade-off between accuracy improvement and computational overhead. DyWPE achieves strong gains with competitive O(L) complexity.</em>
+</p>
+
+For detailed experimental results and ablation studies, please refer to our [paper](https://arxiv.org/abs/2509.14640).
+
 
 ### Contributing
 
@@ -208,6 +226,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 ### Citation
+
+If you find **DyWPE** useful for your research, please consider citing this paper using the following information:
 
 ```bibtex
 @inproceedings{irani2026dywpe,
