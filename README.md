@@ -3,7 +3,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![ICASSP 2026](https://img.shields.io/badge/ICASSP-2026-green.svg)](https://2026.ieeeicassp.org/)
+[![ICASSP 2026](https://img.shields.io/badge/ICASSP-2026-green.svg)](https://cmsworkshops.com/ICASSP2026/papers/accepted_papers.php)
 [![arXiv](https://img.shields.io/badge/arXiv-2509.14640-b31b1b.svg)](https://arxiv.org/abs/2509.14640)
 
 #### **News:** This work has been accepted for publication in [ICASSP 2026](https://2026.ieeeicassp.org/).
