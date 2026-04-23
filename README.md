@@ -6,7 +6,7 @@
 [![ICASSP 2026](https://img.shields.io/badge/ICASSP-2026-green.svg)](https://ieeexplore.ieee.org/document/11460736)
 
 
-#### **News:** This work has been accepted in [ICASSP 2026](https://ieeexplore.ieee.org/document/11460736) and selected for **oral presentation**.
+#### **News:** This work has been accepted at [ICASSP 2026](https://ieeexplore.ieee.org/document/11460736) and selected for **oral presentation**.
 #### DyWPE Paper: [PDF](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11460736)
 
 This is a PyTorch implementation of "DyWPE: Signal-Aware Dynamic Wavelet Positional Encoding for Time Series Transformers"
@@ -205,14 +205,14 @@ Our comprehensive evaluation across 10 diverse time series datasets demonstrates
 #### Performance Overview
 
 <p align="center">
-  <img src="docs/boxplot.png" alt="Performance Distribution" width="47%">
+  <img src="docs/boxplot.png" alt="Performance Distribution" width="48%">
   <img src="docs/accuracy_vs_overhead.png" alt="Accuracy vs Overhead" width="48%">
   <br>
   <em><strong>Left:</strong> Distribution of z-score normalized classification accuracy across 10 datasets. DyWPE shows the highest median performance and most consistent results. 
   <strong>Right:</strong> Trade-off between accuracy improvement and computational overhead. DyWPE achieves strong gains with competitive O(L) complexity.</em>
 </p>
 
-For detailed experimental results and ablation studies, please refer to our [paper](https://arxiv.org/abs/2509.14640).
+For detailed experimental results and ablation studies, please refer to our [paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11460736).
 
 
 ### Contributing
