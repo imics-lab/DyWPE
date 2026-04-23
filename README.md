@@ -3,10 +3,11 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![ICASSP 2026](https://img.shields.io/badge/ICASSP-2026-green.svg)](https://cmsworkshops.com/ICASSP2026/papers/accepted_papers.php)
-[![arXiv](https://img.shields.io/badge/arXiv-2509.14640-b31b1b.svg)](https://arxiv.org/abs/2509.14640)
+[![ICASSP 2026](https://img.shields.io/badge/ICASSP-2026-green.svg)](https://ieeexplore.ieee.org/document/11460736)
 
-#### **News:** This work has been accepted for publication in [ICASSP 2026](https://2026.ieeeicassp.org/).
+
+#### **News:** This work has been accepted in [ICASSP 2026](https://ieeexplore.ieee.org/document/11460736) and selected for **oral presentation**.
+#### DyWPE Paper: [PDF](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11460736)
 
 This is a PyTorch implementation of "DyWPE: Signal-Aware Dynamic Wavelet Positional Encoding for Time Series Transformers"
 
@@ -204,7 +205,7 @@ Our comprehensive evaluation across 10 diverse time series datasets demonstrates
 #### Performance Overview
 
 <p align="center">
-  <img src="docs/boxplot.png" alt="Performance Distribution" width="48%">
+  <img src="docs/boxplot.png" alt="Performance Distribution" width="47%">
   <img src="docs/accuracy_vs_overhead.png" alt="Accuracy vs Overhead" width="48%">
   <br>
   <em><strong>Left:</strong> Distribution of z-score normalized classification accuracy across 10 datasets. DyWPE shows the highest median performance and most consistent results. 
@@ -233,8 +234,9 @@ If you find **DyWPE** useful for your research, please consider citing this pape
 @inproceedings{irani2026dywpe,
   title={DyWPE: Signal-Aware Dynamic Wavelet Positional Encoding for Time Series Transformers},
   author={Irani, Habib and Metsis, Vangelis},
-  booktitle={IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  booktitle={ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
   year={2026},
+  pages={1126-1130},
   organization={IEEE}
 }
 ```
